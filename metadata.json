@@ -1,0 +1,6 @@
+{
+  "name": "Deal Intelligence Agent",
+  "description": "Multi-Agent Enterprise CRM & Deal Intelligence SaaS with Google Search Grounded Research, Multimodal Transcriptions, and Contract RAG.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

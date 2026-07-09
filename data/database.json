@@ -1,0 +1,355 @@
+[
+  {
+    "id": "abc-mfg-101",
+    "name": "Enterprise Workflow & ERP Integration",
+    "company": "ABC Manufacturing",
+    "value": 2000000,
+    "status": "Negotiation",
+    "contactName": "Vikram Sharma",
+    "contactRole": "Chief Technology Officer",
+    "summary": "Manufacturing automation software deployment and deep integration with existing SAP ERP. Security and timeline are high priorities.",
+    "createdAt": "2026-06-10T10:00:00.000Z",
+    "meetings": [
+      {
+        "id": "meeting-1",
+        "title": "Meeting 1: Initial Discovery & Scope Discussion",
+        "date": "2026-06-10",
+        "transcript": "Salesperson: Welcome, Vikram. Let's talk about what ABC Manufacturing is looking for in terms of workflow automation.\nCustomer (Vikram): Thanks. We want to streamline our production scheduling. Our budget for this phase is around ₹20 lakhs. [emphasis] We need implementation fully completed and live before December because that's when our peak shipping season starts.\nSalesperson: Understood. Our typical onboarding and custom configurations take 6 to 8 weeks, so implementing before December is very realistic. Do you have any specific database or ERP requirements?\nCustomer (Vikram): Yes, we run most operations on SAP. [hesitation] We need to sync scheduling data with our central database, but we can cover that in a follow-up technical call.",
+        "summary": "Conducted initial discovery with Vikram (CTO). Customer wants production scheduling automation. Stated budget is ₹20 lakhs. Timeline is firm, requiring live deployment before December peak season.",
+        "sentiment": "Interested",
+        "vocalCuesSummary": "Pace: Measured and decisive. Confidence: High, clear focus on operational deadlines.",
+        "objections": [],
+        "requirements": [
+          {
+            "id": "req-1",
+            "name": "Production Scheduling",
+            "description": "Automate workshop workflow and production timeline scheduling.",
+            "status": "Agreed",
+            "priority": "High",
+            "date": "2026-06-10"
+          },
+          {
+            "id": "req-2",
+            "name": "SAP Database Sync",
+            "description": "Synchronize central database scheduling inputs with ERP.",
+            "status": "In Discussion",
+            "priority": "High",
+            "date": "2026-06-10"
+          }
+        ],
+        "buyingSignals": [
+          {
+            "id": "sig-1",
+            "signalText": "We need implementation fully completed and live before December",
+            "context": "Explicit deployment timeline matches purchasing urgency",
+            "confidence": 85,
+            "date": "2026-06-10"
+          }
+        ],
+        "nextBestActions": [
+          {
+            "id": "act-1",
+            "action": "Schedule technical architecture call",
+            "description": "Include integration engineer to review SAP sync details.",
+            "dueDate": "2026-06-15",
+            "completed": true
+          }
+        ]
+      },
+      {
+        "id": "meeting-2",
+        "title": "Meeting 2: Security, Compliance & Data Policies",
+        "date": "2026-06-17",
+        "transcript": "Salesperson: Hello everyone. Today we are focusing on Vikram's questions regarding compliance and our security architecture.\nCustomer (Security Officer): Data privacy is our highest obstacle. Because we process proprietary manufacturing schematics and supply chain contracts, [emphasis] ISO 27001 compliance is a strict mandate for us. If you don't have ISO 27001, we cannot proceed.\nSalesperson: Rest assured, our cloud platform is ISO 27001 certified and SOC 2 Type II compliant. All transit data is encrypted using TLS 1.3 and at rest with AES-256. I can send over our compliance pack.\nCustomer (Vikram): [excitement] That's great. If you can share the certificates and encryption logs, that will resolve our security team's main blocker. We also need to understand Single Sign-On. We use Okta.\nSalesperson: Yes, we support SAML 2.0 and OIDC, meaning seamless Okta SSO integration. We will detail that in the next technical overview.",
+        "summary": "Focused on compliance and security standards. Security lead joined. Raised a critical objection regarding ISO 27001 and data encryption. Salesperson addressed this, showing certificates and confirming Okta SSO compatibility.",
+        "sentiment": "Neutral",
+        "vocalCuesSummary": "Pace: Direct and analytical. Tone: Cautious but receptive upon receiving compliance confirmations.",
+        "objections": [
+          {
+            "id": "obj-1",
+            "category": "Security",
+            "description": "ISO 27001 compliance and secure encryption are required to prevent leak of proprietary designs.",
+            "status": "Addressed",
+            "notes": "Salesperson promised to send full compliance packet with SOC 2 and ISO 27001 certificates.",
+            "date": "2026-06-17"
+          }
+        ],
+        "requirements": [
+          {
+            "id": "req-3",
+            "name": "Okta SSO Integration",
+            "description": "Support SAML 2.0/OIDC login authentication via Okta directory.",
+            "status": "Agreed",
+            "priority": "Medium",
+            "date": "2026-06-17"
+          },
+          {
+            "id": "req-4",
+            "name": "ISO 27001 Compliance",
+            "description": "Verification of information security certification.",
+            "status": "In Discussion",
+            "priority": "High",
+            "date": "2026-06-17"
+          }
+        ],
+        "buyingSignals": [
+          {
+            "id": "sig-2",
+            "signalText": "If you can share the certificates, that will resolve our security team's main blocker",
+            "context": "Shows willingness to clear hurdles and proceed with evaluation",
+            "confidence": 90,
+            "date": "2026-06-17"
+          }
+        ],
+        "nextBestActions": [
+          {
+            "id": "act-2",
+            "action": "Send Security & Compliance Packet",
+            "description": "Email ISO 27001 certificate and SOC 2 Type II reports to Vikram and Security Officer.",
+            "dueDate": "2026-06-18",
+            "completed": true
+          }
+        ]
+      },
+      {
+        "id": "meeting-3",
+        "title": "Meeting 3: Technical SAP Integration & API Mapping",
+        "date": "2026-06-24",
+        "transcript": "Salesperson: Welcome back. Today we have our solution architect to explain the SAP connector.\nCustomer (IT Director): [hesitation] Our main question is SAP. We utilize SAP ERP Central Component. Is the sync bidirectional, and how is network latency handled?\nSalesperson's Architect: We provide a lightweight, secure endpoint agent that sits adjacent to your SAP server. It fetches inventory and schedule updates, communicating via HTTPS REST APIs every 5 minutes.\nCustomer (Vikram): Excellent. 5-minute interval syncing fits our needs. How does this impact pricing? Is the SAP connector an extra fee or bundled?\nSalesperson: The SAP connector is included at no additional fee under our Enterprise Plan, which is what we proposed to Vikram within the ₹20 lakhs budget.\nCustomer (IT Director): [excitement] That's fantastic. This saves us from managing complex middleware. We are happy with this integration layout. Let's make sure our Okta settings are shared too.",
+        "summary": "Technical mapping of the SAP ERP integration. Solution architect explained bidirectional API synchronization. Stated that the SAP connector is included in the Enterprise plan, which aligns perfectly with the current budget.",
+        "sentiment": "Positive",
+        "vocalCuesSummary": "Pace: Collaborative and collaborative. Tone: Relieved and excited about saving on middleware.",
+        "objections": [],
+        "requirements": [
+          {
+            "id": "req-2",
+            "name": "SAP Database Sync",
+            "description": "Synchronize central database scheduling inputs with ERP via bidirectonal HTTPS REST API.",
+            "status": "Agreed",
+            "priority": "High",
+            "date": "2026-06-24"
+          },
+          {
+            "id": "req-4",
+            "name": "ISO 27001 Compliance",
+            "description": "Verification of information security certification.",
+            "status": "Delivered",
+            "priority": "High",
+            "date": "2026-06-24"
+          }
+        ],
+        "buyingSignals": [
+          {
+            "id": "sig-3",
+            "signalText": "That's fantastic. This saves us from managing complex middleware.",
+            "context": "Expresses high delight with integration simplicity, solidifying vendor fit",
+            "confidence": 95,
+            "date": "2026-06-24"
+          }
+        ],
+        "nextBestActions": [
+          {
+            "id": "act-3",
+            "action": "Draft final proposal and contract agreements",
+            "description": "Assemble commercial contract specifying Enterprise Plan with SAP connector and Okta support for ₹20 lakhs.",
+            "dueDate": "2026-06-28",
+            "completed": true
+          }
+        ]
+      },
+      {
+        "id": "meeting-4",
+        "title": "Meeting 4: Commercial Contract Negotiation & Procurement",
+        "date": "2026-07-01",
+        "transcript": "Salesperson: Hello Vikram. I hope you've had a chance to review the contract proposal we sent over.\nCustomer (Vikram): Yes, we have. The terms look great, [emphasis] and the ₹20 lakhs annual subscription price is approved by our procurement head. One final logistical question: If we sign the contract by this Friday, when can we start the actual project kickoff?\nSalesperson: If we sign the agreement this Friday, we can officially kick off onboarding and technical setup next Monday morning. Our lead customer success engineer is already reserved for ABC Manufacturing.\nCustomer (Vikram): [excitement] That is outstanding. That gives us a comfortable margin ahead of December. I will sign the DocuSign link this afternoon and have procurement process the payment.\nSalesperson: Thank you Vikram. We are excited to partner with you!",
+        "summary": "Final procurement review. Vikram confirmed that the ₹20 lakhs budget has been approved. Signed DocuSign this afternoon. Kickoff scheduled for next Monday.",
+        "sentiment": "Ready to Buy",
+        "vocalCuesSummary": "Pace: Fast, enthusiastic, and decisive. Tone: Highly satisfied and eager to begin.",
+        "objections": [
+          {
+            "id": "obj-1",
+            "category": "Security",
+            "description": "ISO 27001 compliance and secure encryption are required to prevent leak of proprietary designs.",
+            "status": "Resolved",
+            "notes": "Vikram confirmed security lead approved our compliance packet.",
+            "date": "2026-07-01"
+          }
+        ],
+        "requirements": [
+          {
+            "id": "req-1",
+            "name": "Production Scheduling",
+            "description": "Automate workshop workflow and production timeline scheduling.",
+            "status": "Delivered",
+            "priority": "High",
+            "date": "2026-07-01"
+          },
+          {
+            "id": "req-3",
+            "name": "Okta SSO Integration",
+            "description": "Support SAML 2.0/OIDC login authentication via Okta directory.",
+            "status": "Agreed",
+            "priority": "Medium",
+            "date": "2026-07-01"
+          }
+        ],
+        "buyingSignals": [
+          {
+            "id": "sig-4",
+            "signalText": "If we sign by Friday, when can we start? I will sign the DocuSign link this afternoon.",
+            "context": "Final contracting confirmation. Maximum purchase intent.",
+            "confidence": 100,
+            "date": "2026-07-01"
+          }
+        ],
+        "nextBestActions": [
+          {
+            "id": "act-4",
+            "action": "Send welcome onboarding schedule",
+            "description": "Coordinate kick-off calendar invite for next Monday with the Customer Success Engineer.",
+            "dueDate": "2026-07-03",
+            "completed": false
+          }
+        ]
+      }
+    ],
+    "memory": {
+      "budget": "₹20 lakhs budget (Enterprise Plan) approved by procurement",
+      "timeline": "Live deployment required before peak shipping season in December. Onboarding scheduled for Monday kickoff (6-8 weeks duration).",
+      "securityConcerns": [
+        "ISO 27001 Compliance",
+        "AES-256 data encryption at rest",
+        "SAML 2.0/OIDC Okta SSO support"
+      ],
+      "integrationsRequired": [
+        "SAP ERP Central Component integration (bidirectional REST API mapping)",
+        "Okta Directory Identity integration"
+      ],
+      "decisionMakers": [
+        "Vikram Sharma (CTO)",
+        "IT Director",
+        "Security Officer"
+      ],
+      "competitors": [
+        "No formal competitors listed; evaluated building in-house middleware originally"
+      ],
+      "lastUpdated": "2026-07-01T15:00:00.000Z"
+    },
+    "prediction": {
+      "probability": 98,
+      "reasons": [
+        "Strong executive buying signal from Vikram (CTO)",
+        "Budget fully approved at ₹20 lakhs Enterprise price point",
+        "Security objection fully resolved (ISO 27001 and Okta approved)",
+        "Bidirectional SAP ERP integration fit validated by IT Director",
+        "DocuSign contract signing scheduled for this Friday"
+      ],
+      "lastUpdated": "2026-07-01T15:00:00.000Z"
+    },
+    "nextActions": [
+      {
+        "id": "act-4",
+        "action": "Send welcome onboarding schedule",
+        "description": "Coordinate kick-off calendar invite for next Monday with the Customer Success Engineer.",
+        "dueDate": "2026-07-03",
+        "completed": false
+      }
+    ]
+  },
+  {
+    "id": "delta-retail-202",
+    "name": "Omnichannel Logistics Automation",
+    "company": "Delta Retail",
+    "value": 1200000,
+    "status": "Discovery",
+    "contactName": "Pooja Reddy",
+    "contactRole": "Head of Logistics",
+    "summary": "Supply chain fulfillment automation targeting multi-warehouse inventory coordination. Budget is tight, and we face competition from Zoho Creator.",
+    "createdAt": "2026-06-15T09:00:00.000Z",
+    "meetings": [
+      {
+        "id": "delta-meeting-1",
+        "title": "Meeting 1: Supply Chain Overhaul Exploration",
+        "date": "2026-06-15",
+        "transcript": "Salesperson: Welcome Pooja. Let's look at Delta Retail's multi-warehouse issues.\nCustomer (Pooja): [emphasis] We are experiencing heavy delays in inventory updates across our Mumbai and Bangalore warehouses. We need a system to sync inventories in near real-time.\nSalesperson: Understood. Our automation suite handles inventory syncing natively. What's the budget and timeframe?\nCustomer (Pooja): [hesitation] Our ideal budget is around ₹12 lakhs. However, our board is also looking closely at Zoho Creator and custom-built options which seem cheaper on paper. We need to decide by October.\nSalesperson: We can definitely outline a proposal targeting that budget, highlighting how we differ from basic custom tools.",
+        "summary": "Initial meeting with Pooja (Head of Logistics). Mumbai/Bangalore real-time warehouse sync is the primary requirement. Stated budget ₹12 lakhs. Under tight competition with Zoho Creator. Decision targeted for October.",
+        "sentiment": "Concerned",
+        "vocalCuesSummary": "Pace: Rapid and anxious. Tone: Cautious due to competitor offerings and internal budget limits.",
+        "objections": [
+          {
+            "id": "obj-delta-1",
+            "category": "Price",
+            "description": "Cheaper competitor alternatives like Zoho Creator are being actively scrutinized by the board.",
+            "status": "Identified",
+            "notes": "Salesperson needs to prepare a clear ROI sheet proving why our ready-to-use platform defeats building with Zoho.",
+            "date": "2026-06-15"
+          }
+        ],
+        "requirements": [
+          {
+            "id": "req-delta-1",
+            "name": "Real-time Multi-Warehouse Sync",
+            "description": "Sync stock counts automatically between Mumbai and Bangalore warehouses.",
+            "status": "In Discussion",
+            "priority": "High",
+            "date": "2026-06-15"
+          }
+        ],
+        "buyingSignals": [
+          {
+            "id": "sig-delta-1",
+            "signalText": "We need a system to sync inventories in near real-time.",
+            "context": "Clear focus on solving immediate logistics operational bottlenecks.",
+            "confidence": 70,
+            "date": "2026-06-15"
+          }
+        ],
+        "nextBestActions": [
+          {
+            "id": "act-delta-1",
+            "action": "Build competitor battle-card and ROI analysis",
+            "description": "Draft comparison showing setup time and maintenance costs of Zoho Creator vs. our solution.",
+            "dueDate": "2026-06-20",
+            "completed": false
+          }
+        ]
+      }
+    ],
+    "memory": {
+      "budget": "₹12 lakhs target budget, facing board-level cost sensitivity",
+      "timeline": "Decision planned for October, looking to resolve shipping delays for upcoming seasonal sales.",
+      "securityConcerns": [],
+      "integrationsRequired": [
+        "Warehouse Inventory Management System API connection"
+      ],
+      "decisionMakers": [
+        "Pooja Reddy (Head of Logistics)",
+        "Finance Board Member"
+      ],
+      "competitors": [
+        "Zoho Creator",
+        "In-house custom build"
+      ],
+      "lastUpdated": "2026-06-15T12:00:00.000Z"
+    },
+    "prediction": {
+      "probability": 45,
+      "reasons": [
+        "Strong price objection and active competition from Zoho Creator",
+        "Early stage discovery with incomplete technical scoping",
+        "No direct access to financial board decision-makers yet",
+        "Logistics urgency is high, which remains a positive driver"
+      ],
+      "lastUpdated": "2026-06-15T12:00:00.000Z"
+    },
+    "nextActions": [
+      {
+        "id": "act-delta-1",
+        "action": "Build competitor battle-card and ROI analysis",
+        "description": "Draft comparison showing setup time and maintenance costs of Zoho Creator vs. our solution.",
+        "dueDate": "2026-06-20",
+        "completed": false
+      }
+    ]
+  }
+]

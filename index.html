@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Suppress benign Vite/WebSocket sandbox HMR connection warnings in the preview frame synchronously at the very start
+      (function() {
+        if (typeof window !== 'undefined') {
+          const ignorePatterns = ['websocket', 'vite', 'hmr', 'ws://', 'wss://', 'web socket', 'closed without opened', 'failed to connect to websocket', 'networkerror'];
+          
+          const isWebSocketErrorObject = function(obj) {
+            if (!obj) return false;
+            const cName = obj?.constructor?.name || '';
+            if (cName === 'WebSocket' || cName === 'WebSocketEvent') return true;
+            if (obj instanceof Event) {
+              if (obj.type === 'error' || obj.type === 'close') {
+                const targetCName = obj.target?.constructor?.name || '';
+                if (targetCName === 'WebSocket') return true;
+                if (obj.target && ('url' in obj.target) && ('readyState' in obj.target)) return true;
+              }
+            }
+            if (obj.target && typeof obj.target === 'object') {
+              const target = obj.target;
+              if (typeof target.url === 'string' && (target.url.startsWith('ws://') || target.url.startsWith('wss://'))) {
+                return true;
+              }
+            }
+            const strMsg = String(obj.message || obj.reason || obj.description || obj || '').toLowerCase();
+            if (ignorePatterns.some(pat => strMsg.includes(pat))) return true;
+            if (obj.error) {
+              const nestedMsg = String(obj.error.message || obj.error).toLowerCase();
+              if (ignorePatterns.some(pat => nestedMsg.includes(pat))) return true;
+            }
+            return false;
+          };
+
+          const shouldIgnore = function(args) {
+            return args.some(arg => {
+              if (isWebSocketErrorObject(arg)) return true;
+              const str = String(arg || '').toLowerCase();
+              return ignorePatterns.some(pat => str.includes(pat));
+            });
+          };
+
+          // Suppress unhandled rejections as early as possible
+          window.addEventListener('unhandledrejection', function(event) {
+            const reason = event.reason;
+            if (isWebSocketErrorObject(reason)) {
+              event.preventDefault();
+              event.stopPropagation();
+              return;
+            }
+            const msg = reason?.message || String(reason || '');
+            const stack = reason?.stack || '';
+            const fullText = (msg + ' ' + stack).toLowerCase();
+            if (ignorePatterns.some(pat => fullText.includes(pat))) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+          }, { capture: true });
+
+          // Suppress general errors as early as possible
+          window.addEventListener('error', function(event) {
+            if (isWebSocketErrorObject(event) || isWebSocketErrorObject(event.error)) {
+              event.preventDefault();
+              event.stopPropagation();
+              return;
+            }
+            const msg = event.message || '';
+            const errorMsg = event.error?.message || '';
+            const fullText = (msg + ' ' + errorMsg).toLowerCase();
+            if (ignorePatterns.some(pat => fullText.includes(pat))) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+          }, { capture: true });
+
+          // Patch Console
+          const originalError = console.error;
+          console.error = function (...args) {
+            if (shouldIgnore(args)) return;
+            originalError.apply(console, args);
+          };
+
+          const originalWarn = console.warn;
+          console.warn = function (...args) {
+            if (shouldIgnore(args)) return;
+            originalWarn.apply(console, args);
+          };
+
+          // Patch WebSocket construction
+          if (window.WebSocket) {
+            const OriginalWebSocket = window.WebSocket;
+            const SilentWebSocket = new Proxy(OriginalWebSocket, {
+              construct(target, args) {
+                try {
+                  const ws = Reflect.construct(target, args);
+                  ws.addEventListener('error', function(event) {
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                  }, { capture: true });
+                  ws.addEventListener('close', function(event) {
+                    event.stopPropagation();
+                    event.stopImmediatePropagation();
+                  }, { capture: true });
+                  return ws;
+                } catch (err) {
+                  // Return a mock/noop ws if construction fails or throws
+                  const mockWs = {
+                    addEventListener() {},
+                    removeEventListener() {},
+                    send() {},
+                    close() {},
+                    readyState: 3, // CLOSED
+                    url: args[0] || ''
+                  };
+                  return mockWs;
+                }
+              }
+            });
+            try {
+              Object.defineProperty(window, 'WebSocket', {
+                value: SilentWebSocket,
+                writable: true,
+                configurable: true,
+                enumerable: true
+              });
+            } catch (e) {
+              window.WebSocket = SilentWebSocket;
+            }
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
